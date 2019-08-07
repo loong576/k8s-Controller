@@ -1,0 +1,20 @@
+apiVersion: apps/v1    #api版本
+kind: ReplicaSet
+metadata:
+  name: httpd 
+spec:
+  replicas: 3
+  selector:
+    matchExpressions:
+      - key: app        #标签名为app
+        operator: In    #In : Label的值必须与其中一个指定的values匹配
+        values:
+         - httpd        #标签值为httpd
+  template:             #replicaset模板
+    metadata:
+      labels:
+        app: httpd 
+    spec:
+      containers:
+      - name: httpd 
+        image: httpd 

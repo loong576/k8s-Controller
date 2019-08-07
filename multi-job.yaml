@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: multi-job
+spec:
+  completions: 10    #设置Job成功完成Pod的总数
+  parallelism: 2    #pod并行执行数
+  template:
+    metadata:
+      labels:
+        app: multi-job
+    spec:
+      restartPolicy: OnFailure    #设置容器失败后重启
+      containers:
+      - name: busybox
+        image: busybox
